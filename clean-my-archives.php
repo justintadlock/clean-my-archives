@@ -20,23 +20,35 @@ add_action( 'save_post', 'clean_my_archives_delete_cache' );
  * @since 0.1
  * @return string $clean Formatted archives.
  */
-function clean_my_archives() {
-	global $post;
-
-	/* Check for a cached archives. */
-	$cache = wp_cache_get( 'clean_my_archives' );
-
-	/* If there is a cached archive, return it instead of doing all the work we've already done. */
-	if ( !empty( $cache ) )
-		return $cache;
+function clean_my_archives( $args = array() ) {
 
 	/* Set up some default variables that need to be empty. */
 	$clean = '';
 	$current_year = '';
 	$current_month = '';
+	$cache = array();
 
-	/* Query all posts from the database. */
-	$loop = new WP_Query( array( 'posts_per_page' => 1000, 'post_type' => array( 'post' ) ) );
+	/* Default arguments. */
+	$defaults = array(
+		'posts_per_page' => -1,
+		'post_type' => array( 'post' ),
+		'year' => '',
+		'monthnum' => '',
+	);
+	$args = shortcode_atts( $defaults, $args );
+
+	/* Create a unique key for this particular set of archives. */
+	$key = md5( serialize( compact( array_keys( $args ) ) ) );
+
+	/* Check for a cached archives. */
+	$cache = wp_cache_get( 'clean_my_archives' );
+
+	/* If there is a cached archive, return it instead of doing all the work we've already done. */
+	if ( is_array( $cache ) && !empty( $cache[$key] ) )
+		return $cache;
+
+	/* Query posts from the database. */
+	$loop = new WP_Query( $args );
 
 	/* If posts were found, format them for output. */
 	if ( $loop->have_posts() ) {
@@ -86,8 +98,13 @@ function clean_my_archives() {
 	/* Reset the query to the page's original query. */
 	wp_reset_query();
 
+	/* Make sure $cache is an array. */
+	if ( !is_array( $cache ) )
+		$cache = array();
+
 	/* Set the cache for the plugin, so caching plugins can make this super fast. */
-	wp_cache_set( 'clean_my_archives', $clean );
+	$cache[$key] = $clean;
+	wp_cache_set( 'clean_my_archives', $cache );
 
 	/* Return the formatted archives. */
 	return $clean;
