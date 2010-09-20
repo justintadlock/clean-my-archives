@@ -1,26 +1,69 @@
 <?php
 /**
  * Plugin Name: Clean My Archives
- * Plugin URI: http://justintadlock.com
- * Description: A plugin that displays a full archive of posts by month.
+ * Plugin URI: http://devpress.com/plugins/clean-my-archives
+ * Description: A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
  * Version: 0.1
- * Author: Justin Tadlock
- * Author URI: http://justintadlock.com
+ * Author: DevPress
+ * Author URI: http://devpress.com
+ *
+ * Clean My Archives is a plugin developed to simplify the process of adding a list of archives to your site.  So 
+ * many archives plugins make things overly complex or add a lot of junk to the page like unneeded JavaScript.  
+ * This plugin was created to clean your archives page.
+ *
+ * @copyright 2008 - 2010
+ * @version 0.1
+ * @author Justin Tadlock
+ * @link http://devpress.com/plugins/clean-my-archives
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @package CleanMyArchives
  */
 
-/* Add [clean-my-archives] shortcode. */
-add_shortcode( 'clean-my-archives', 'clean_my_archives' );
+/* Set up the plugin. */
+add_action( 'plugins_loaded', 'clean_my_archives_setup' );
 
-/* Delete the cache when a post is saved. */
-add_action( 'save_post', 'clean_my_archives_delete_cache' );
+/**
+ * Sets up the plugin and calls its default actions.
+ *
+ * @since 0.1
+ */
+function clean_my_archives_setup() {
+
+	/* Load translations on the front end. */
+	if ( !is_admin() )
+		load_plugin_textdomain( 'clean-my-archives', false, 'clean-my-archives/languages' );
+
+	/* Register shortcodes. */
+	add_action( 'init', 'clean_my_archives_shortcodes' );
+
+	/* Delete the cache when a post is saved. */
+	add_action( 'save_post', 'clean_my_archives_delete_cache' );
+}
+
+/**
+ * Registers shortcodes for the plugin.
+ *
+ * @since 0.1
+ */
+function clean_my_archives_shortcodes() {
+
+	/* Add [clean-my-archives] shortcode. */
+	add_shortcode( 'clean-my-archives', 'clean_my_archives' );
+}
 
 /**
  * Returns a formated archive of all posts for the blog.
  *
  * @since 0.1
+ * @param array $attr The shortcode attributes.
  * @return string $clean Formatted archives.
  */
-function clean_my_archives( $args = array() ) {
+function clean_my_archives( $attr = array() ) {
 
 	/* Set up some default variables that need to be empty. */
 	$clean = '';
@@ -30,22 +73,30 @@ function clean_my_archives( $args = array() ) {
 
 	/* Default arguments. */
 	$defaults = array(
-		'posts_per_page' => -1,
-		'post_type' => array( 'post' ),
+		'limit' => -1,
 		'year' => '',
-		'monthnum' => '',
+		'month' => '',
 	);
-	$args = shortcode_atts( $defaults, $args );
+	$attr = shortcode_atts( $defaults, $attr );
+
+	/* Set up some arguments to pass to WP_Query. */
+	$args = array(
+		'posts_per_page' => $attr['limit'],
+		'year' => $attr['year'],
+		'monthnum' => $attr['month'],
+		'post_type' => array( 'post' ),
+		'caller_get_posts' => true, // Disable sticky posts.
+	);
 
 	/* Create a unique key for this particular set of archives. */
-	$key = md5( serialize( compact( array_keys( $args ) ) ) );
+	$key = md5( serialize( array_values( $args ) ) );
 
 	/* Check for a cached archives. */
 	$cache = wp_cache_get( 'clean_my_archives' );
 
 	/* If there is a cached archive, return it instead of doing all the work we've already done. */
 	if ( is_array( $cache ) && !empty( $cache[$key] ) )
-		return $cache;
+		return $cache[$key];
 
 	/* Query posts from the database. */
 	$loop = new WP_Query( $args );
@@ -85,7 +136,7 @@ function clean_my_archives( $args = array() ) {
 			$day = get_the_time( __( 'd:', 'clean-my-archives' ) );
 
 			/* Get the post's number of comments. */
-			$comments = '(' . get_comments_number() . ')';
+			$comments = sprintf( _x( '(%s)', 'Comments number beside post title.', 'clean-my-archives' ), get_comments_number() );
 
 			/* Add the post list item to the formatted archives. */
 			$clean .= the_title( '<li>' . $day . ' <a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a> ' . $comments . '</li>', false );

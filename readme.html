@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>A guide to the Clean My Archives plugin</title>
+
+<style type="text/css">body{width:750px;margin:36px auto 60px auto;font:16px/25px Georgia,Times,'Times New Roman',serif}a:link,a:visited{color:#2f6eb9;text-decoration:none}a:hover,a:active{text-decoration:underline}h1,h2,h3,h4,h5,h6{margin:40px 0 30px 0;color:#000;font-weight:bold;font-family:Arial,sans-serif}h1{margin-top:80px;font-size:2.2em}code{padding:0 3px;background:#eee}pre code{padding:0}pre{padding:9px;background:#eee;border:1px solid #ccc}ul{list-style:square}p.first{font-size:21px}p.second{font-size:15px}ul.space li{margin-bottom:10px}.section{overflow:hidden}.columns-2{float:left;width:350px;margin:0 0 21px 25px}.columns-3{float:left;width:230px;margin:0 0 21px 20px}</style>
+
+</head>
+<body>
+
+<h1>Clean My Archives</h1>
+
+<p><em>Clean My Archives</em> is a plugin developed to simplify the process of adding a list of archives to your site.  So many archives plugins make things overly complex or add a lot of junk to the page like unneeded JavaScript.  This plugin was created to <em>clean your archives</em> page.</p>
+
+<p>The plugin make the process of adding an archives page extremely simply by providing an easy-to-use shortcode called <code>[clean-my-archives]</code> that you just drop in a shortcode-ready area.</p>
+
+<h2>Installation</h2>
+
+<ul>
+	<li>Download and unzip the <code>clean-my-archives.zip</code> file.</li>
+	<li>Upload <code>clean-my-archives</code> to the <code>/wp-content/plugins/</code> directory.</li>
+	<li>Activate the plugin through the <em>Plugins</em> menu in WordPress.</li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Using the plugin is extremely simple.  You only need to have a shortcode-ready area such as the page editor.  Most people will simply need to follow these steps to get an archives page:</p>
+
+<ul>
+	<li>Create a new page called "Archives" (or anything) in your WordPress admin.</li>
+	<li>Add the <code>[clean-my-archives]</code> shortcode to this page.</li>
+	<li>Save.  And, you're done!</li>
+</ul>
+
+<h2>Additional shortcode options</h2>
+
+<p>The shortcode has a few extra options if you wish to use them:</p>
+
+<ul>
+	<li><code>year</code>:  Only show posts of a specific year.</li>
+	<li><code>month</code>:  Only show posts of a specific month.</li>
+	<li><code>limit</code>:  Limit the number of posts shown.  By default, this is <code>-1</code>, which shows all posts.</li>
+</ul>
+
+<p><strong>Example showing posts from 2010:</strong></p>
+
+<pre><code>[clean-my-archives year="2010"]</code></pre>
+
+<p><strong>Example showing posts from July 2010:</strong></p>
+
+<pre><code>[clean-my-archvies year="2010" month="7"]</code></pre>
+
+<p><strong>Example showing only the latest 100 posts:</strong></p>
+
+<pre><code>[clean-my-archives limit="100"]</code></pre>
+
+<h2>Paginating your archives</h2>
+
+<p>If you have tons of posts, such as 1,500+, you might want to consider paginating your archives.  Loading too many posts at once might not work, depending on your server setup.  Fortunately, WordPress has built-in pagination for pages, so using this along with this plugin will work just fine.</p>
+
+<p>Let's suppose you want to paginate your archives by year.  You can easily do this in the page editor:</p>
+
+<pre><code>[clean-my-archives year="2010"]
+
+&lt;!--nextpage-->
+
+[clean-my-archives year="2009"]
+
+&lt;!--nextpage-->
+
+[clean-my-archives year="2008"]
+
+&lt;!--nextpage-->
+
+[clean-my-archives year="2007"]</code></pre>
+
+<h2>Plugin support</h2>
+
+<p>Support for the <em>Clean My Archives</em> plugin is not offered on the WordPress support forums.  We have a community called <a href="http://devpress.com" title="DevPress">DevPress</a> where we offer support of all our themes and plugins.  We encourage you to sign up to the site to use its support forums and become a part of our community.</p>
+
+<h2>Copyright &amp; license</h2>
+
+<p><em>Clean My Archives</em> is licensed under the <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" title="GNU GPL">GNU General Public License</a>, version 2 (<acronym title="GNU General Public License">GPL</acronym>).</p>
+
+<p>This plugin is copyrighted to <a href="http://devpress.com" title="DevPress LLC">DevPress LLC</a>.</p>
+
+<p>2010 &copy; DevPress LLC</p>
+
+</body>
+</html>
