@@ -1,7 +1,7 @@
-=== Members ===
+=== Clean My Archives ===
 Contributors: greenshady, ptahdunbar, developdaly, devpress
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3687060
-Tags: admin, cms, community, profile, shortcode, user, users
+Tags: archives, shortcode
 Requires at least: 3.0
 Tested up to: 3.0.1
 Stable tag: 0.1
