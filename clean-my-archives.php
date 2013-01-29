@@ -3,7 +3,7 @@
  * Plugin Name: Clean My Archives
  * Plugin URI: http://devpress.com/plugins/clean-my-archives
  * Description: A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
- * Version: 0.1
+ * Version: 0.2-alpha
  * Author: DevPress
  * Author URI: http://devpress.com
  *
