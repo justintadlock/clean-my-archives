@@ -85,7 +85,7 @@ function clean_my_archives( $attr = array() ) {
 		'year' => $attr['year'],
 		'monthnum' => $attr['month'],
 		'post_type' => array( 'post' ),
-		'caller_get_posts' => true, // Disable sticky posts.
+		'ignore_sticky_posts' => true, // Disable sticky posts.
 	);
 
 	/* Create a unique key for this particular set of archives. */
