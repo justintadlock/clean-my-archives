@@ -80,6 +80,7 @@ function clean_my_archives( $attr = array() ) {
 	$clean         = '';
 	$current_year  = '';
 	$current_month = '';
+	$current_day   = '';
 	$cache         = array();
 
 	/* Default arguments. */
@@ -124,8 +125,9 @@ function clean_my_archives( $attr = array() ) {
 			$loop->the_post();
 
 			/* Get the post's year and month. We need this to compare it with the previous post date. */
-			$year  = get_the_time( 'Y' );
-			$month = get_the_time( 'm' );
+			$year   = get_the_time( 'Y' );
+			$month  = get_the_time( 'm' );
+			$daynum = get_the_time( 'd' );
 
 			/* If the current date doesn't match this post's date, we need extra formatting. */
 			if ( $current_year !== $year || $current_month !== $month ) {
@@ -137,9 +139,10 @@ function clean_my_archives( $attr = array() ) {
 				/* Set the current year and month to this post's year and month. */
 				$current_year  = $year;
 				$current_month = $month;
+				$current_day   = '';
 
 				/* Add a heading with the month and year and link it to the monthly archive. */
-				$clean .= '<h2><a href="' . get_month_link( $current_year, $current_month ) . '">' . get_the_time( __( 'F Y', 'clean-my-archives' ) ) . '</a></h2>';
+				$clean .= '<h2 class="month-year"><a href="' . get_month_link( $current_year, $current_month ) . '">' . get_the_time( __( 'F Y', 'clean-my-archives' ) ) . '</a></h2>';
 
 				/* Open a new unordered list. */
 				$clean .= '<ul>';
@@ -152,8 +155,12 @@ function clean_my_archives( $attr = array() ) {
 			$comments_num = sprintf( _x( '(%d)', 'Comments number', 'clean-my-archives' ), get_comments_number() );
 			$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
 
+			/* Check if there's a duplicate day so we can add a class. */
+			$duplicate_day = !empty( $current_day ) && $daynum === $current_day ? ' class="day-duplicate"' : '';
+			$current_day   = $daynum;
+
 			/* Add the post list item to the formatted archives. */
-			$clean .= the_title( '<li>' . $day . ' <a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a> ' . $comments . '</li>', false );
+			$clean .= the_title( '<li' . $duplicate_day . '>' . $day . ' <a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a> ' . $comments . '</li>', false );
 		}
 
 		/* Close the final unordered list. */
@@ -172,7 +179,7 @@ function clean_my_archives( $attr = array() ) {
 	wp_cache_set( 'clean_my_archives', $cache );
 
 	/* Return the formatted archives. */
-	return $clean;
+	return !empty( $clean ) ? "<div class='clean-my-archives'>{$clean}</div>" : '';
 }
 
 /**
