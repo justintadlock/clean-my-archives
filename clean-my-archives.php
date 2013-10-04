@@ -36,7 +36,9 @@ add_action( 'plugins_loaded', 'clean_my_archives_setup' );
 /**
  * Sets up the plugin and calls its default actions.
  *
- * @since 0.1
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function clean_my_archives_setup() {
 
@@ -54,7 +56,9 @@ function clean_my_archives_setup() {
 /**
  * Registers shortcodes for the plugin.
  *
- * @since 0.1
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function clean_my_archives_shortcodes() {
 
@@ -65,33 +69,35 @@ function clean_my_archives_shortcodes() {
 /**
  * Returns a formated archive of all posts for the blog.
  *
- * @since 0.1
- * @param array $attr The shortcode attributes.
- * @return string $clean Formatted archives.
+ * @since  0.1.0
+ * @access public
+ * @param  array   $attr   The shortcode attributes.
+ * @return string  $clean  Formatted archives.
  */
 function clean_my_archives( $attr = array() ) {
 
 	/* Set up some default variables that need to be empty. */
-	$clean = '';
-	$current_year = '';
+	$clean         = '';
+	$current_year  = '';
 	$current_month = '';
-	$cache = array();
+	$cache         = array();
 
 	/* Default arguments. */
 	$defaults = array(
 		'limit' => -1,
-		'year' => '',
+		'year'  => '',
 		'month' => '',
 	);
+
 	$attr = shortcode_atts( $defaults, $attr );
 
 	/* Set up some arguments to pass to WP_Query. */
 	$args = array(
-		'posts_per_page' => $attr['limit'],
-		'year' => $attr['year'],
-		'monthnum' => $attr['month'],
-		'post_type' => array( 'post' ),
-		'ignore_sticky_posts' => true, // Disable sticky posts.
+		'posts_per_page'      => $attr['limit'],
+		'year'                => $attr['year'],
+		'monthnum'            => $attr['month'],
+		'post_type'           => array( 'post' ),
+		'ignore_sticky_posts' => true,
 	);
 
 	/* Create a unique key for this particular set of archives. */
@@ -101,8 +107,8 @@ function clean_my_archives( $attr = array() ) {
 	$cache = wp_cache_get( 'clean_my_archives' );
 
 	/* If there is a cached archive, return it instead of doing all the work we've already done. */
-	if ( is_array( $cache ) && !empty( $cache[$key] ) )
-		return $cache[$key];
+	if ( is_array( $cache ) && !empty( $cache[ $key ] ) )
+		return $cache[ $key ];
 
 	/* Query posts from the database. */
 	$loop = new WP_Query( $args );
@@ -117,7 +123,7 @@ function clean_my_archives( $attr = array() ) {
 			$loop->the_post();
 
 			/* Get the post's year and month. We need this to compare it with the previous post date. */
-			$year = get_the_time( 'Y' );
+			$year  = get_the_time( 'Y' );
 			$month = get_the_time( 'm' );
 
 			/* If the current date doesn't match this post's date, we need extra formatting. */
@@ -128,7 +134,7 @@ function clean_my_archives( $attr = array() ) {
 					$clean .= '</ul>';
 
 				/* Set the current year and month to this post's year and month. */
-				$current_year = $year;
+				$current_year  = $year;
 				$current_month = $month;
 
 				/* Add a heading with the month and year and link it to the monthly archive. */
@@ -160,7 +166,7 @@ function clean_my_archives( $attr = array() ) {
 		$cache = array();
 
 	/* Set the cache for the plugin, so caching plugins can make this super fast. */
-	$cache[$key] = $clean;
+	$cache[ $key ] = $clean;
 	wp_cache_set( 'clean_my_archives', $cache );
 
 	/* Return the formatted archives. */
@@ -170,7 +176,9 @@ function clean_my_archives( $attr = array() ) {
 /**
  * Deletes the archive cache for users that are using a persistent-caching plugin.
  *
- * @since 0.2
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function clean_my_archives_delete_cache() {
 	wp_cache_delete( 'clean_my_archives' );
