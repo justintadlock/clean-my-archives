@@ -146,10 +146,11 @@ function clean_my_archives( $attr = array() ) {
 			}
 
 			/* Get the post's day. */
-			$day = '<span class="day">' . get_the_time( __( 'd:', 'clean-my-archives' ) ) . '</span>';
+			$day = sprintf( '<span class="day">%s</span>', get_the_time( __( 'd:', 'clean-my-archives' ) ) );
 
 			/* Get the post's number of comments. */
-			$comments = '<span class="comments-number">' . sprintf( _x( '(%s)', 'Comments number beside post title.', 'clean-my-archives' ), get_comments_number() ) . '</span>';
+			$comments_num = sprintf( _x( '(%d)', 'Comments number', 'clean-my-archives' ), get_comments_number() );
+			$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
 
 			/* Add the post list item to the formatted archives. */
 			$clean .= the_title( '<li>' . $day . ' <a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a> ' . $comments . '</li>', false );
