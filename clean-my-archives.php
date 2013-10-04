@@ -1,27 +1,33 @@
 <?php
 /**
  * Plugin Name: Clean My Archives
- * Plugin URI: http://devpress.com/plugins/clean-my-archives
+ * Plugin URI: http://themehybrid.com/plugins/clean-my-archives
  * Description: A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
- * Version: 0.2-alpha
- * Author: DevPress
- * Author URI: http://devpress.com
+ * Version: 0.2.0-alpha
+ * Author: Justin Tadlock
+ * Author URI: http://justintadlock.com
  *
- * Clean My Archives is a plugin developed to simplify the process of adding a list of archives to your site.  So 
- * many archives plugins make things overly complex or add a lot of junk to the page like unneeded JavaScript.  
- * This plugin was created to clean your archives page.
+ * Clean My Archives is a plugin developed to simplify the process of adding a list of archives to your 
+ * site.  So many archives plugins make things overly complex or add a lot of junk to the page like unneeded 
+ * JavaScript.  This plugin was created to clean your archives page.
  *
- * @copyright 2008 - 2010
- * @version 0.1
- * @author Justin Tadlock
- * @link http://devpress.com/plugins/clean-my-archives
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
+ * General Public License as published by the Free Software Foundation; either version 2 of the License, 
+ * or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @package CleanMyArchives
+ * You should have received a copy of the GNU General Public License along with this program; if not, write 
+ * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ *
+ * @package   CleanMyArchives
+ * @version   0.2.0
+ * @since     0.1.0
+ * @author    Justin Tadlock <justin@justintadlock.com>
+ * @copyright Copyright (c) 2008 - 2013, Justin Tadlock
+ * @link      http://themehybrid.com/plugins/clean-my-archives
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Set up the plugin. */
