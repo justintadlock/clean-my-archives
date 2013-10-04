@@ -84,9 +84,10 @@ function clean_my_archives( $attr = array() ) {
 
 	/* Default arguments. */
 	$defaults = array(
-		'limit' => -1,
-		'year'  => '',
-		'month' => '',
+		'limit'     => -1,
+		'year'      => '',
+		'month'     => '',
+		'post_type' => 'post'
 	);
 
 	$attr = shortcode_atts( $defaults, $attr );
@@ -96,7 +97,7 @@ function clean_my_archives( $attr = array() ) {
 		'posts_per_page'      => $attr['limit'],
 		'year'                => $attr['year'],
 		'monthnum'            => $attr['month'],
-		'post_type'           => array( 'post' ),
+		'post_type'           => is_array( $attr['post_type'] ) ? $attr['post_type'] : explode( ',', $attr['post_type'] ),
 		'ignore_sticky_posts' => true,
 	);
 
