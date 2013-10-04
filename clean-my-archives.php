@@ -161,7 +161,7 @@ function clean_my_archives( $attr = array() ) {
 	}
 
 	/* Reset the query to the page's original query. */
-	wp_reset_query();
+	wp_reset_postdata();
 
 	/* Make sure $cache is an array. */
 	if ( !is_array( $cache ) )
