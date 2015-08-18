@@ -89,7 +89,7 @@ function clean_my_archives( $attr = array() ) {
 		'post_type' => 'post'
 	);
 
-	$attr = shortcode_atts( $defaults, $attr );
+	$attr = shortcode_atts( $defaults, $attr, 'clean-my-archives' );
 
 	// Set up some arguments to pass to WP_Query.
 	$args = array(
