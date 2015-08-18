@@ -107,7 +107,7 @@ function clean_my_archives( $attr = array() ) {
 	$cache = wp_cache_get( 'clean_my_archives' );
 
 	// If there is a cached archive, return it instead of doing all the work we've already done.
-	if ( is_array( $cache ) && !empty( $cache[ $key ] ) )
+	if ( is_array( $cache ) && ! empty( $cache[ $key ] ) )
 		return $cache[ $key ];
 
 	// Query posts from the database.
@@ -131,7 +131,7 @@ function clean_my_archives( $attr = array() ) {
 			if ( $current_year !== $year || $current_month !== $month ) {
 
 				// Close the list if this isn't the first post.
-				if ( !empty( $current_month ) && !empty( $current_year ) )
+				if ( $current_month && $current_year )
 					$clean .= '</ul>';
 
 				// Set the current year and month to this post's year and month.
@@ -140,7 +140,11 @@ function clean_my_archives( $attr = array() ) {
 				$current_day   = '';
 
 				// Add a heading with the month and year and link it to the monthly archive.
-				$clean .= '<h2 class="month-year"><a href="' . esc_url( get_month_link( $current_year, $current_month ) ) . '">' . get_the_time( esc_html__( 'F Y', 'clean-my-archives' ) ) . '</a></h2>';
+				$clean .= sprintf(
+					'<h2 class="month-year"><a href="%s">%s</a></h2>',
+					esc_url( get_month_link( $current_year, $current_month ) ),
+					esc_html( get_the_time( __( 'F Y', 'clean-my-archives' ) ) )
+				);
 
 				// Open a new unordered list.
 				$clean .= '<ul>';
@@ -154,11 +158,15 @@ function clean_my_archives( $attr = array() ) {
 			$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
 
 			// Check if there's a duplicate day so we can add a class.
-			$duplicate_day = !empty( $current_day ) && $daynum === $current_day ? ' class="day-duplicate"' : '';
+			$duplicate_day = $current_day && $daynum === $current_day ? ' class="day-duplicate"' : '';
 			$current_day   = $daynum;
 
 			// Add the post list item to the formatted archives.
-			$clean .= the_title( '<li' . $duplicate_day . '>' . $day . ' <a href="' . esc_url( get_permalink() ) . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a> ' . $comments . '</li>', false );
+			$clean .= the_title(
+				sprintf( '<li%s>%s<a href="%s" rel="bookmark">', $duplicate_day, $day, esc_url( get_permalink() ) ),
+				sprintf( '</a>%s</li>', $comments ),
+				false
+			);
 		}
 
 		// Close the final unordered list.
@@ -169,7 +177,7 @@ function clean_my_archives( $attr = array() ) {
 	wp_reset_postdata();
 
 	// Make sure $cache is an array.
-	if ( !is_array( $cache ) )
+	if ( ! is_array( $cache ) )
 		$cache = array();
 
 	// Set the cache for the plugin, so caching plugins can make this super fast.
@@ -177,7 +185,7 @@ function clean_my_archives( $attr = array() ) {
 	wp_cache_set( 'clean_my_archives', $cache );
 
 	// Return the formatted archives.
-	return !empty( $clean ) ? "<div class='clean-my-archives'>{$clean}</div>" : '';
+	return $clean ? sprintf( '<div class="clean-my-archives">%s</div>', $clean ) : '';
 }
 
 /**
