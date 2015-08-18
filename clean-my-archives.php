@@ -41,9 +41,8 @@ add_action( 'plugins_loaded', 'clean_my_archives_setup' );
  */
 function clean_my_archives_setup() {
 
-	// Load translations on the front end.
-	if ( !is_admin() )
-		load_plugin_textdomain( 'clean-my-archives', false, 'clean-my-archives/languages' );
+	// Load translations.
+	load_plugin_textdomain( 'clean-my-archives', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'languages' );
 
 	// Register shortcodes.
 	add_action( 'init', 'clean_my_archives_shortcodes' );
