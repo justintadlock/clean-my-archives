@@ -140,17 +140,17 @@ function clean_my_archives( $attr = array() ) {
 				$current_day   = '';
 
 				// Add a heading with the month and year and link it to the monthly archive.
-				$clean .= '<h2 class="month-year"><a href="' . esc_url( get_month_link( $current_year, $current_month ) ) . '">' . get_the_time( __( 'F Y', 'clean-my-archives' ) ) . '</a></h2>';
+				$clean .= '<h2 class="month-year"><a href="' . esc_url( get_month_link( $current_year, $current_month ) ) . '">' . get_the_time( esc_html__( 'F Y', 'clean-my-archives' ) ) . '</a></h2>';
 
 				// Open a new unordered list.
 				$clean .= '<ul>';
 			}
 
 			// Get the post's day.
-			$day = sprintf( '<span class="day">%s</span>', get_the_time( __( 'd:', 'clean-my-archives' ) ) );
+			$day = sprintf( '<span class="day">%s</span>', get_the_time( esc_html__( 'd:', 'clean-my-archives' ) ) );
 
-			// Get the post's number of comments.
-			$comments_num = sprintf( _x( '(%d)', 'Comments number', 'clean-my-archives' ), get_comments_number() );
+			// Translators: %d is the comment count.
+			$comments_num = sprintf( esc_html__( '(%d)', 'clean-my-archives' ), get_comments_number() );
 			$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
 
 			// Check if there's a duplicate day so we can add a class.
