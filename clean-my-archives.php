@@ -140,7 +140,7 @@ function clean_my_archives( $attr = array() ) {
 				$current_day   = '';
 
 				// Add a heading with the month and year and link it to the monthly archive.
-				$clean .= '<h2 class="month-year"><a href="' . get_month_link( $current_year, $current_month ) . '">' . get_the_time( __( 'F Y', 'clean-my-archives' ) ) . '</a></h2>';
+				$clean .= '<h2 class="month-year"><a href="' . esc_url( get_month_link( $current_year, $current_month ) ) . '">' . get_the_time( __( 'F Y', 'clean-my-archives' ) ) . '</a></h2>';
 
 				// Open a new unordered list.
 				$clean .= '<ul>';
@@ -158,7 +158,7 @@ function clean_my_archives( $attr = array() ) {
 			$current_day   = $daynum;
 
 			// Add the post list item to the formatted archives.
-			$clean .= the_title( '<li' . $duplicate_day . '>' . $day . ' <a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a> ' . $comments . '</li>', false );
+			$clean .= the_title( '<li' . $duplicate_day . '>' . $day . ' <a href="' . esc_url( get_permalink() ) . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a> ' . $comments . '</li>', false );
 		}
 
 		// Close the final unordered list.
