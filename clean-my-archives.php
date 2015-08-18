@@ -173,6 +173,10 @@ function clean_my_archives( $attr = array() ) {
 		$clean .= '</ul>';
 	}
 
+	// Wrap the list in a `<div>`.
+	if ( $clean )
+		$clean = sprintf( '<div class="clean-my-archives">%s</div>', $clean );
+
 	// Reset the query to the page's original query.
 	wp_reset_postdata();
 
@@ -185,7 +189,7 @@ function clean_my_archives( $attr = array() ) {
 	wp_cache_set( 'clean_my_archives', $cache );
 
 	// Return the formatted archives.
-	return $clean ? sprintf( '<div class="clean-my-archives">%s</div>', $clean ) : '';
+	return $clean;
 }
 
 /**
