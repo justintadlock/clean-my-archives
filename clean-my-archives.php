@@ -93,9 +93,9 @@ function clean_my_archives( $attr = array() ) {
 
 	// Set up some arguments to pass to WP_Query.
 	$args = array(
-		'posts_per_page'      => $attr['limit'],
-		'year'                => $attr['year'],
-		'monthnum'            => $attr['month'],
+		'posts_per_page'      => intval( $attr['limit'] ),
+		'year'                => $attr['year'] ? absint( $attr['year'] ) : '',
+		'monthnum'            => $attr['month'] ? absint( $attr['month'] ) : '',
 		'post_type'           => is_array( $attr['post_type'] ) ? $attr['post_type'] : explode( ',', $attr['post_type'] ),
 		'ignore_sticky_posts' => true,
 	);
