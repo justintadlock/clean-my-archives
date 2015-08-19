@@ -163,8 +163,8 @@ function clean_my_archives( $attr = array() ) {
 
 			// Add the post list item to the formatted archives.
 			$clean .= the_title(
-				sprintf( '<li%s>%s<a href="%s" rel="bookmark">', $duplicate_day, $day, esc_url( get_permalink() ) ),
-				sprintf( '</a>%s</li>', $comments ),
+				sprintf( '<li%s>%s <a href="%s" rel="bookmark">', $duplicate_day, $day, esc_url( get_permalink() ) ),
+				sprintf( '</a> %s</li>', $comments ),
 				false
 			);
 		}
