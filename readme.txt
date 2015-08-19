@@ -5,7 +5,7 @@ Donate link: http://themehybrid.com/donate
 Tags: archives, shortcode
 Requires at least: 3.1
 Tested up to: 3.7
-Stable tag: 0.2.0
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ This plugin also integrates with WordPress caching plugins.  So, long lists of a
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 40,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
 
 ### Plugin Development
 
@@ -86,23 +86,10 @@ Sort of.  Technically, it doesn't.  However, WordPress pages support pagination.
 
 == Screenshots ==
 
-You can see a [live demo here](http://justintadlock.com).
+You can see a [live demo here](http://justintadlock.com/archives).
 
 1. Screenshot of the plugin in action my archives page.
 
 == Changelog ==
 
-### Version 0.2.0
-
-* Use `wp_reset_postdata()`, not `wp_reset_query()`.
-* Smarter code formatting for day and comments number.
-* Add support for custom post types or a mix of any post type.
-* Code formatting and inline doc cleanup.
-* Use the newer `ignore_sticky_posts` instead of `caller_get_posts`.
-* Add `<span>` wrappers for styling the day and comments number.
-* Add `.day-duplicate` class to `<li>` if it's a repeating day.
-* Add `<div class="clean-my-archives">` wrapper for entire output.
-
-### Version 0.1.0
-
-* Plugin launch.  Everything's new!
+To view the change log, look into the `changelog.md` file included with the plugin or visit the [online change log](https://github.com/justintadlock/clean-my-archives/blob/master/changelog.md).

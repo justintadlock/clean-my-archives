@@ -40,29 +40,12 @@ Some other examples:
 	<!-- nextpage -->
 	[clean-my-archives year="2011"]
 
-## Changelog
-
-### Version 0.2.0
-
-* Use `wp_reset_postdata()`, not `wp_reset_query()`.
-* Smarter code formatting for day and comments number.
-* Add support for custom post types or a mix of any post type.
-* Code formatting and inline doc cleanup.
-* Use the newer `ignore_sticky_posts` instead of `caller_get_posts`.
-* Add `<span>` wrappers for styling the day and comments number.
-* Add `.day-duplicate` class to `<li>` if it's a repeating day.
-* Add `<div class="clean-my-archives">` wrapper for entire output.
-
-### Version 0.1.0
-
-* Plugin launch.  Everything's new!
-
 ## Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 40,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
 
 ## Copyright and License
 
 This project is licensed under the [GNU GPL](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html), version 2 or later.
 
-2008&thinsp;&ndash;&thinsp;2013 &copy; [Justin Tadlock](http://justintadlock.com).
+2008&thinsp;&ndash;&thinsp;2015 &copy; [Justin Tadlock](http://justintadlock.com).
