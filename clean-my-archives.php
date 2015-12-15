@@ -3,7 +3,7 @@
  * Plugin Name: Clean My Archives
  * Plugin URI:  http://themehybrid.com/plugins/clean-my-archives
  * Description: A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
- * Version:     1.0.0
+ * Version:     1.1.0-dev
  * Author:      Justin Tadlock
  * Author URI:  http://justintadlock.com
  *
@@ -22,7 +22,7 @@
  * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @package   CleanMyArchives
- * @version   1.0.0
+ * @version   1.1.0
  * @author    Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2008 - 2015, Justin Tadlock
  * @link      http://themehybrid.com/plugins/clean-my-archives
