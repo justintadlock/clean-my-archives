@@ -75,11 +75,8 @@ function clean_my_archives_shortcodes() {
 function clean_my_archives( $attr = array() ) {
 
 	// Set up some default variables that need to be empty.
-	$clean         = '';
-	$current_year  = '';
-	$current_month = '';
-	$current_day   = '';
-	$cache         = array();
+	$clean = $current_year = $current_month = $current_day = '';
+	$cache = array();
 
 	// Default arguments.
 	$defaults = array(
