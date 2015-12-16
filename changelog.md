@@ -1,5 +1,15 @@
 # Change Log
 
+## [1.1.0] - 2015-12-15
+
+### Added
+
+* New `order` parameter. Posts can now be ordered in ascending (`ASC`) or descending (`DESC`).  The default is descending.
+
+### Changed
+
+* Minor code cleanup.
+
 ## [1.0.0] - 2015-08-19
 
 ### Added

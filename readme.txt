@@ -55,6 +55,12 @@ Of course, there are some other configuration options. Examples follow.
 #### Limit the number of posts with the `limit` parameter:
 
 	[clean-my-archives limit="100"]
+	
+#### Reverse the order with the `order` parameter (default is `DESC`):
+	
+	[clean-my-archives order="ASC"]
+
+	[clean-my-archives order="DESC"]
 
 #### Use the `year` parameter to limit to a year:
 
