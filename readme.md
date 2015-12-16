@@ -12,27 +12,33 @@ This plugin also integrates with WordPress caching plugins.  So, long lists of a
 
 Add the `[clean-my-archives]` shortcode to a shortcode-ready area, such as the page editor. That's it.  You have nothing more to do.
 
-Some other examples:
+However, there are some parameters you can use.  The following are examples of these parameters in use.
 
-	// Limit number of posts
+#### Limit the number of posts with the `limit` parameter:
 
 	[clean-my-archives limit="100"]
 
-	// Limit by year
+#### Reverse the order with the `order` parameter (default is `DESC`):
+
+	[clean-my-archives order="ASC"]
+
+	[clean-my-archives order="DESC"]
+
+#### Use the `year` parameter to limit to a year:
 
 	[clean-my-archives year="2013"]
 
-	// Limit by month
+#### Use the `month` parameter to limit by month:
 
 	[clean-my-archives month="12"]
 
-	// Load different post types
+#### Load specific post types with the `post_type` parameter
 
 	[clean-my-archives post_type="post"]
 
 	[clean-my-archives post_type="post, page"]
 
-	// Pagination (via the post/page editor)
+#### Pagination (via the post/page editor):
 
 	[clean-my-archives year="2013"]
 	<!-- nextpage -->
