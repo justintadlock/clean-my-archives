@@ -3,7 +3,7 @@
  * Plugin Name: Clean My Archives
  * Plugin URI:  http://themehybrid.com/plugins/clean-my-archives
  * Description: A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
- * Version:     1.1.0
+ * Version:     1.1.0-dev
  * Author:      Justin Tadlock
  * Author URI:  http://justintadlock.com
  *
@@ -89,15 +89,21 @@ function clean_my_archives( $attr = array() ) {
 
 	$attr = shortcode_atts( $defaults, $attr, 'clean-my-archives' );
 
+	// Get the post type.
+	$post_type = is_array( $attr['post_type'] ) ? $attr['post_type'] : explode( ',', $attr['post_type'] );
+
 	// Set up some arguments to pass to WP_Query.
 	$args = array(
 		'posts_per_page'      => intval( $attr['limit'] ),
 		'year'                => $attr['year'] ? absint( $attr['year'] ) : '',
 		'monthnum'            => $attr['month'] ? absint( $attr['month'] ) : '',
-		'post_type'           => is_array( $attr['post_type'] ) ? $attr['post_type'] : explode( ',', $attr['post_type'] ),
+		'post_type'           => $post_type,
 		'order'               => in_array( $attr['order'], array( 'ASC', 'DESC' ) ) ? $attr['order'] : 'DESC',
 		'ignore_sticky_posts' => true,
 	);
+
+	// If we have one specific post type, let's get the query args to append to the month link
+	$query_args = 1 === count( $post_type ) && 'post' !== $post_type[0] ? array( 'post_type' => $post_type[0] ) : false;
 
 	// Create a unique key for this particular set of archives.
 	$key = md5( serialize( array_values( $args ) ) );
@@ -138,10 +144,16 @@ function clean_my_archives( $attr = array() ) {
 				$current_month = $month;
 				$current_day   = '';
 
+				// Build the month link.
+				$month_link = get_month_link( $current_year, $current_month );
+
+				if ( $query_args )
+					$month_link = add_query_arg( $query_args, $month_link );
+
 				// Add a heading with the month and year and link it to the monthly archive.
 				$clean .= sprintf(
 					'<h2 class="month-year"><a href="%s">%s</a></h2>',
-					esc_url( get_month_link( $current_year, $current_month ) ),
+					esc_url( $month_link ),
 					esc_html( get_the_time( __( 'F Y', 'clean-my-archives' ) ) )
 				);
 
