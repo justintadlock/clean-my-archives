@@ -85,7 +85,9 @@ function clean_my_archives( $attr = array() ) {
 		'month'              => '',
 		'post_type'          => 'post',
 		'order'              => 'DESC',
+		// Translators: Month + Year date/time format.
 		'month_format'       => __( 'F Y', 'clean-my-archives' ),
+		// Translators: Day date/time format.
 		'day_format'         => __( 'd:', 'clean-my-archives' ),
 		'show_comment_count' => true
 	);
