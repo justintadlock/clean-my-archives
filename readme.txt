@@ -1,7 +1,7 @@
 === Clean My Archives ===
 
 Contributors: greenshady
-Donate link: http://themehybrid.com/donate
+Donate link: https://themehybrid.com/donate
 Tags: archives, shortcode
 Requires at least: 3.1
 Stable tag: 1.1.0
@@ -20,7 +20,7 @@ This plugin also integrates with WordPress caching plugins.  So, long lists of a
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](https://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
 
 ### Plugin Development
 
@@ -28,7 +28,7 @@ If you're a theme author, plugin author, or just a code hobbyist, you can follow
 
 ### Donations
 
-Yes, I do accept donations.  If you want to buy me a beer or whatever, you can do so from my [donations page](http://themehybrid.com/donate).  I appreciate all donations, no matter the size.  Further development of this plugin is not contingent on donations, but they are always a nice incentive.
+Yes, I do accept donations.  If you want to buy me a beer or whatever, you can do so from my [donations page](https://themehybrid.com/donate).  I appreciate all donations, no matter the size.  Further development of this plugin is not contingent on donations, but they are always a nice incentive.
 
 == Installation ==
 
