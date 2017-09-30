@@ -80,11 +80,13 @@ function clean_my_archives( $attr = array() ) {
 
 	// Default arguments.
 	$defaults = array(
-		'limit'     => -1,
-		'year'      => '',
-		'month'     => '',
-		'post_type' => 'post',
-		'order'     => 'DESC'
+		'limit'        => -1,
+		'year'         => '',
+		'month'        => '',
+		'post_type'    => 'post',
+		'order'        => 'DESC',
+		'month_format' => __( 'F Y', 'clean-my-archives' ),
+		'day_format'   => __( 'd:', 'clean-my-archives' ),
 	);
 
 	$attr = shortcode_atts( $defaults, $attr, 'clean-my-archives' );
@@ -154,7 +156,7 @@ function clean_my_archives( $attr = array() ) {
 				$clean .= sprintf(
 					'<h2 class="month-year"><a href="%s">%s</a></h2>',
 					esc_url( $month_link ),
-					esc_html( get_the_time( __( 'F Y', 'clean-my-archives' ) ) )
+					esc_html( get_the_time( $attr['month_format'] ) )
 				);
 
 				// Open a new unordered list.
@@ -162,7 +164,7 @@ function clean_my_archives( $attr = array() ) {
 			}
 
 			// Get the post's day.
-			$day = sprintf( '<span class="day">%s</span>', get_the_time( esc_html__( 'd:', 'clean-my-archives' ) ) );
+			$day = sprintf( '<span class="day">%s</span>', esc_html( get_the_time( $attr['day_format'] ) ) );
 
 			// Translators: %d is the comment count.
 			$comments_num = sprintf( esc_html__( '(%d)', 'clean-my-archives' ), get_comments_number() );
