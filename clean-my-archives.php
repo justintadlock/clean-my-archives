@@ -184,11 +184,13 @@ function clean_my_archives( $attr = array() ) {
 			$duplicate_day = $current_day && $daynum === $current_day ? ' class="day-duplicate"' : '';
 			$current_day   = $daynum;
 
-			// Add the post list item to the formatted archives.
-			$clean .= the_title(
-				sprintf( '<li%s>%s <a href="%s" rel="bookmark">', $duplicate_day, $day, esc_url( get_permalink() ) ),
-				sprintf( '</a> %s</li>', $comments ),
-				false
+			$clean .= sprintf(
+				'<li%s>%s <a href="%s" rel="bookmark">%s</a> %s</li>',
+				$duplicate_day,
+				$day,
+				esc_url( get_permalink() ),
+				get_the_title() ? the_title( '', '', false ) : get_the_ID(),
+				$comments
 			);
 		}
 
