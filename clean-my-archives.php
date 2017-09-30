@@ -80,16 +80,20 @@ function clean_my_archives( $attr = array() ) {
 
 	// Default arguments.
 	$defaults = array(
-		'limit'        => -1,
-		'year'         => '',
-		'month'        => '',
-		'post_type'    => 'post',
-		'order'        => 'DESC',
-		'month_format' => __( 'F Y', 'clean-my-archives' ),
-		'day_format'   => __( 'd:', 'clean-my-archives' ),
+		'limit'              => -1,
+		'year'               => '',
+		'month'              => '',
+		'post_type'          => 'post',
+		'order'              => 'DESC',
+		'month_format'       => __( 'F Y', 'clean-my-archives' ),
+		'day_format'         => __( 'd:', 'clean-my-archives' ),
+		'show_comment_count' => true
 	);
 
 	$attr = shortcode_atts( $defaults, $attr, 'clean-my-archives' );
+
+	// Validate boolean values passed through shortcode.
+	$show_comments = wp_validate_boolean( $attr['show_comment_count'] ) ? 1 : false;
 
 	// Get the post type.
 	$post_type = is_array( $attr['post_type'] ) ? $attr['post_type'] : explode( ',', $attr['post_type'] );
@@ -166,9 +170,15 @@ function clean_my_archives( $attr = array() ) {
 			// Get the post's day.
 			$day = sprintf( '<span class="day">%s</span>', esc_html( get_the_time( $attr['day_format'] ) ) );
 
-			// Translators: %d is the comment count.
-			$comments_num = sprintf( esc_html__( '(%d)', 'clean-my-archives' ), get_comments_number() );
-			$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
+			// Set up the comments variable.
+			$comments = '';
+
+			if ( $show_comments ) {
+
+				// Translators: %d is the comment count.
+				$comments_num = sprintf( esc_html__( '(%d)', 'clean-my-archives' ), get_comments_number() );
+				$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
+			}
 
 			// Check if there's a duplicate day so we can add a class.
 			$duplicate_day = $current_day && $daynum === $current_day ? ' class="day-duplicate"' : '';
