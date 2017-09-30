@@ -32,11 +32,21 @@ However, there are some parameters you can use.  The following are examples of t
 
 	[clean-my-archives month="12"]
 
-### Load specific post types with the `post_type` parameter
+### Load specific post types with the `post_type` parameter:
 
 	[clean-my-archives post_type="post"]
 
 	[clean-my-archives post_type="post, page"]
+
+### Disable the comment count from showing:
+
+	[clean-my-archives show_comment_count="0"]
+
+### Change the month and day date/time format
+
+	[clean-my-archives month_format="F Y" day_format="d:"]
+
+For a full list of formats, see the [PHP Date Formats](http://php.net/manual/en/datetime.formats.date.php) guide.
 
 ### Pagination (via the post/page editor):
 
@@ -45,10 +55,6 @@ However, there are some parameters you can use.  The following are examples of t
 	[clean-my-archives year="2012"]
 	<!-- nextpage -->
 	[clean-my-archives year="2011"]
-
-## Professional Support
-
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](https://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
 
 ## Copyright and License
 
