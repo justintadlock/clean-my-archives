@@ -44,7 +44,7 @@ However, there are some parameters you can use.  The following are examples of t
 
 ### Change the month and day date/time format
 
-	[clean-my-archives month_format="F Y" day_format="d:"]
+	[clean-my-archives format_month_year="F Y" format_post_date="d:"]
 
 For a full list of formats, see the [PHP Date Formats](http://php.net/manual/en/datetime.formats.date.php) guide.
 

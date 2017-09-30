@@ -78,7 +78,7 @@ Of course, there are some other configuration options. Examples follow.
 
 #### Change the month and day date/time format
 
-	[clean-my-archives month_format="F Y" day_format="d:"]
+	[clean-my-archives format_month_year="F Y" format_post_date="d:"]
 
 For a full list of formats, see the [PHP Date Formats](http://php.net/manual/en/datetime.formats.date.php) guide.
 
