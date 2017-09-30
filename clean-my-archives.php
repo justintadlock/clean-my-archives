@@ -175,7 +175,7 @@ function clean_my_archives( $attr = array() ) {
 			// Set up the comments variable.
 			$comments = '';
 
-			if ( $show_comments ) {
+			if ( $show_comments && ( comments_open() || get_comments_number() ) ) {
 
 				// Translators: %d is the comment count.
 				$comments_num = sprintf( esc_html__( '(%d)', 'clean-my-archives' ), get_comments_number() );
