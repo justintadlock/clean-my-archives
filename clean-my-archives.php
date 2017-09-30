@@ -88,9 +88,9 @@ function clean_my_archives( $attr = array() ) {
 		'post_type'          => 'post',
 		'order'              => 'DESC',
 		// Translators: Month + Year date/time format.
-		'month_format'       => __( 'F Y', 'clean-my-archives' ),
+		'format_month_year'  => __( 'F Y', 'clean-my-archives' ),
 		// Translators: Day date/time format.
-		'day_format'         => __( 'd:', 'clean-my-archives' ),
+		'format_post_date'   => __( 'd:', 'clean-my-archives' ),
 		'show_comment_count' => true
 	);
 
@@ -164,7 +164,7 @@ function clean_my_archives( $attr = array() ) {
 				$clean .= sprintf(
 					'<h2 class="month-year"><a href="%s">%s</a></h2>',
 					esc_url( $month_link ),
-					esc_html( get_the_time( $attr['month_format'] ) )
+					esc_html( get_the_time( $attr['format_month_year'] ) )
 				);
 
 				// Open a new unordered list.
@@ -172,7 +172,7 @@ function clean_my_archives( $attr = array() ) {
 			}
 
 			// Get the post's day.
-			$day = sprintf( '<span class="day">%s</span>', esc_html( get_the_time( $attr['day_format'] ) ) );
+			$day = sprintf( '<span class="day">%s</span>', esc_html( get_the_time( $attr['format_post_date'] ) ) );
 
 			// Set up the comments variable.
 			$comments = '';
