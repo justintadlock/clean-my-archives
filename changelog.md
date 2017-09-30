@@ -1,5 +1,22 @@
 # Change Log
 
+## [1.2.0] - 2017-09-30
+
+### Added
+
+* New `show_comment_count` parameter.  Set to `0` or `false` to hide the comment count.
+* New `format_month_year` parameter to change the month + year date format.  Any valid PHP date format is acceptable.
+* New `format_post_date` parameter to change the post date format.  Any valid PHP date format is acceptable.
+
+### Changed
+
+* By default, the comment count will only appear if comments are open or the post has existing comments.
+
+### Fixed
+
+* When a post doesn't have a title, display the post ID.
+* Display the correct monthly archive link for custom post types.
+
 ## [1.1.0] - 2015-12-15
 
 ### Added
