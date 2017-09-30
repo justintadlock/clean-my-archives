@@ -1,28 +1,32 @@
-# Copyright (C) 2015 Clean My Archives
+# Copyright (C) 2017 Clean My Archives
 # This file is distributed under the same license as the Clean My Archives package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Clean My Archives 1.0.0-dev\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/clean-my-archives\n"
-"POT-Creation-Date: 2015-08-19 17:53:02+00:00\n"
+"Project-Id-Version: Clean My Archives 1.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/clean-my-archives\n"
+"POT-Creation-Date: 2017-09-30 17:36:51+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: clean-my-archives.php:146
+#. Translators: Month + Year date/time format.
+
+#: clean-my-archives.php:91
 msgid "F Y"
 msgstr ""
 
-#: clean-my-archives.php:154
+#. Translators: Day date/time format.
+
+#: clean-my-archives.php:93
 msgid "d:"
 msgstr ""
 
 #. Translators: %d is the comment count.
 
-#: clean-my-archives.php:157
+#: clean-my-archives.php:183
 msgid "(%d)"
 msgstr ""
 #. Plugin Name of the plugin/theme
@@ -30,7 +34,7 @@ msgid "Clean My Archives"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://themehybrid.com/plugins/clean-my-archives"
+msgid "https://themehybrid.com/plugins/clean-my-archives"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -42,5 +46,5 @@ msgid "Justin Tadlock"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://justintadlock.com"
+msgid "https://themehybrid.com"
 msgstr ""

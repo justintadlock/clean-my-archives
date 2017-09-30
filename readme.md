@@ -14,31 +14,41 @@ Add the `[clean-my-archives]` shortcode to a shortcode-ready area, such as the p
 
 However, there are some parameters you can use.  The following are examples of these parameters in use.
 
-#### Limit the number of posts with the `limit` parameter:
+### Limit the number of posts with the `limit` parameter:
 
 	[clean-my-archives limit="100"]
 
-#### Reverse the order with the `order` parameter (default is `DESC`):
+### Reverse the order with the `order` parameter (default is `DESC`):
 
 	[clean-my-archives order="ASC"]
 
 	[clean-my-archives order="DESC"]
 
-#### Use the `year` parameter to limit to a year:
+### Use the `year` parameter to limit to a year:
 
 	[clean-my-archives year="2013"]
 
-#### Use the `month` parameter to limit by month:
+### Use the `month` parameter to limit by month:
 
 	[clean-my-archives month="12"]
 
-#### Load specific post types with the `post_type` parameter
+### Load specific post types with the `post_type` parameter:
 
 	[clean-my-archives post_type="post"]
 
 	[clean-my-archives post_type="post, page"]
 
-#### Pagination (via the post/page editor):
+### Disable the comment count from showing:
+
+	[clean-my-archives show_comment_count="0"]
+
+### Change the month and day date/time format
+
+	[clean-my-archives format_month_year="F Y" format_post_date="d:"]
+
+For a full list of formats, see the [PHP Date Formats](http://php.net/manual/en/datetime.formats.date.php) guide.
+
+### Pagination (via the post/page editor):
 
 	[clean-my-archives year="2013"]
 	<!-- nextpage -->
@@ -46,12 +56,8 @@ However, there are some parameters you can use.  The following are examples of t
 	<!-- nextpage -->
 	[clean-my-archives year="2011"]
 
-## Professional Support
-
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
-
 ## Copyright and License
 
 This project is licensed under the [GNU GPL](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html), version 2 or later.
 
-2008&thinsp;&ndash;&thinsp;2015 &copy; [Justin Tadlock](http://justintadlock.com).
+2008 - 2017 &copy; [Justin Tadlock](http://justintadlock.com).

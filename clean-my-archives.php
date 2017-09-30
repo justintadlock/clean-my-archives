@@ -1,11 +1,13 @@
 <?php
 /**
  * Plugin Name: Clean My Archives
- * Plugin URI:  http://themehybrid.com/plugins/clean-my-archives
+ * Plugin URI:  https://themehybrid.com/plugins/clean-my-archives
  * Description: A plugin that displays a full archive of posts by month and year with the <code>[clean-my-archives]</code> shortcode.
- * Version:     1.1.0-dev
+ * Version:     1.2.0
  * Author:      Justin Tadlock
- * Author URI:  http://justintadlock.com
+ * Author URI:  https://themehybrid.com
+ * Text Domain: clean-my-archives
+ * Domain Path: /lang
  *
  * Clean My Archives is a plugin developed to simplify the process of adding a list of archives to your
  * site.  So many archives plugins make things overly complex or add a lot of junk to the page like unneeded
@@ -22,10 +24,10 @@
  * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @package   CleanMyArchives
- * @version   1.1.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2008 - 2015, Justin Tadlock
- * @link      http://themehybrid.com/plugins/clean-my-archives
+ * @version   1.2.0
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2008 - 2017, Justin Tadlock
+ * @link      https://themehybrid.com/plugins/clean-my-archives
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -42,7 +44,7 @@ add_action( 'plugins_loaded', 'clean_my_archives_setup' );
 function clean_my_archives_setup() {
 
 	// Load translations.
-	load_plugin_textdomain( 'clean-my-archives', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'languages' );
+	load_plugin_textdomain( 'clean-my-archives', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'lang' );
 
 	// Register shortcodes.
 	add_action( 'init', 'clean_my_archives_shortcodes' );
@@ -80,24 +82,38 @@ function clean_my_archives( $attr = array() ) {
 
 	// Default arguments.
 	$defaults = array(
-		'limit'     => -1,
-		'year'      => '',
-		'month'     => '',
-		'post_type' => 'post',
-		'order'     => 'DESC'
+		'limit'              => -1,
+		'year'               => '',
+		'month'              => '',
+		'post_type'          => 'post',
+		'order'              => 'DESC',
+		// Translators: Month + Year date/time format.
+		'format_month_year'  => __( 'F Y', 'clean-my-archives' ),
+		// Translators: Day date/time format.
+		'format_post_date'   => __( 'd:', 'clean-my-archives' ),
+		'show_comment_count' => true
 	);
 
 	$attr = shortcode_atts( $defaults, $attr, 'clean-my-archives' );
+
+	// Validate boolean values passed through shortcode.
+	$show_comments = wp_validate_boolean( $attr['show_comment_count'] ) ? 1 : false;
+
+	// Get the post type.
+	$post_type = is_array( $attr['post_type'] ) ? $attr['post_type'] : explode( ',', $attr['post_type'] );
 
 	// Set up some arguments to pass to WP_Query.
 	$args = array(
 		'posts_per_page'      => intval( $attr['limit'] ),
 		'year'                => $attr['year'] ? absint( $attr['year'] ) : '',
 		'monthnum'            => $attr['month'] ? absint( $attr['month'] ) : '',
-		'post_type'           => is_array( $attr['post_type'] ) ? $attr['post_type'] : explode( ',', $attr['post_type'] ),
+		'post_type'           => $post_type,
 		'order'               => in_array( $attr['order'], array( 'ASC', 'DESC' ) ) ? $attr['order'] : 'DESC',
 		'ignore_sticky_posts' => true,
 	);
+
+	// If we have one specific post type, let's get the query args to append to the month link
+	$query_args = 1 === count( $post_type ) && 'post' !== $post_type[0] ? array( 'post_type' => $post_type[0] ) : false;
 
 	// Create a unique key for this particular set of archives.
 	$key = md5( serialize( array_values( $args ) ) );
@@ -138,11 +154,17 @@ function clean_my_archives( $attr = array() ) {
 				$current_month = $month;
 				$current_day   = '';
 
+				// Build the month link.
+				$month_link = get_month_link( $current_year, $current_month );
+
+				if ( $query_args )
+					$month_link = add_query_arg( $query_args, $month_link );
+
 				// Add a heading with the month and year and link it to the monthly archive.
 				$clean .= sprintf(
 					'<h2 class="month-year"><a href="%s">%s</a></h2>',
-					esc_url( get_month_link( $current_year, $current_month ) ),
-					esc_html( get_the_time( __( 'F Y', 'clean-my-archives' ) ) )
+					esc_url( $month_link ),
+					esc_html( get_the_time( $attr['format_month_year'] ) )
 				);
 
 				// Open a new unordered list.
@@ -150,21 +172,29 @@ function clean_my_archives( $attr = array() ) {
 			}
 
 			// Get the post's day.
-			$day = sprintf( '<span class="day">%s</span>', get_the_time( esc_html__( 'd:', 'clean-my-archives' ) ) );
+			$day = sprintf( '<span class="day">%s</span>', esc_html( get_the_time( $attr['format_post_date'] ) ) );
 
-			// Translators: %d is the comment count.
-			$comments_num = sprintf( esc_html__( '(%d)', 'clean-my-archives' ), get_comments_number() );
-			$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
+			// Set up the comments variable.
+			$comments = '';
+
+			if ( $show_comments && ( comments_open() || get_comments_number() ) ) {
+
+				// Translators: %d is the comment count.
+				$comments_num = sprintf( esc_html__( '(%d)', 'clean-my-archives' ), get_comments_number() );
+				$comments     = sprintf( '<span class="comments-number">%s</span>',  $comments_num );
+			}
 
 			// Check if there's a duplicate day so we can add a class.
 			$duplicate_day = $current_day && $daynum === $current_day ? ' class="day-duplicate"' : '';
 			$current_day   = $daynum;
 
-			// Add the post list item to the formatted archives.
-			$clean .= the_title(
-				sprintf( '<li%s>%s <a href="%s" rel="bookmark">', $duplicate_day, $day, esc_url( get_permalink() ) ),
-				sprintf( '</a> %s</li>', $comments ),
-				false
+			$clean .= sprintf(
+				'<li%s>%s <a href="%s" rel="bookmark">%s</a> %s</li>',
+				$duplicate_day,
+				$day,
+				esc_url( get_permalink() ),
+				get_the_title() ? the_title( '', '', false ) : get_the_ID(),
+				$comments
 			);
 		}
 
