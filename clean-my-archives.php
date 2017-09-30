@@ -6,6 +6,8 @@
  * Version:     1.1.0-dev
  * Author:      Justin Tadlock
  * Author URI:  https://themehybrid.com
+ * Text Domain: clean-my-archives
+ * Domain Path: /lang
  *
  * Clean My Archives is a plugin developed to simplify the process of adding a list of archives to your
  * site.  So many archives plugins make things overly complex or add a lot of junk to the page like unneeded
@@ -42,7 +44,7 @@ add_action( 'plugins_loaded', 'clean_my_archives_setup' );
 function clean_my_archives_setup() {
 
 	// Load translations.
-	load_plugin_textdomain( 'clean-my-archives', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'languages' );
+	load_plugin_textdomain( 'clean-my-archives', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'lang' );
 
 	// Register shortcodes.
 	add_action( 'init', 'clean_my_archives_shortcodes' );
