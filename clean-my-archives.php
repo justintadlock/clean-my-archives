@@ -82,17 +82,26 @@ function clean_my_archives( $attr = array() ) {
 
 	// Default arguments.
 	$defaults = array(
+		'type'               => 'monthly', // monthly|yearly
 		'limit'              => -1,
 		'year'               => '',
 		'month'              => '',
 		'post_type'          => 'post',
 		'order'              => 'DESC',
+		// Translators: Year time format.
+		'format_year'        => __( 'Y', 'clean-my-archives' ),
 		// Translators: Month + Year date/time format.
 		'format_month_year'  => __( 'F Y', 'clean-my-archives' ),
 		// Translators: Day date/time format.
 		'format_post_date'   => __( 'd:', 'clean-my-archives' ),
 		'show_comment_count' => true
 	);
+
+	if ( isset( $attr['type'] ) && 'yearly' === $attr['type'] ) {
+
+		// Translators: Post date format when showing archives by year.
+		$defaults['format_post_date'] = __( 'F j', 'clean-my-archives' );
+	}
 
 	$attr = shortcode_atts( $defaults, $attr, 'clean-my-archives' );
 
